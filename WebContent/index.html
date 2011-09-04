@@ -1,60 +1,72 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
         "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-    <script src="offline/jquery-latest.js"></script>
-    <script type="text/javascript" src="game.js"></script>
-    <script>
-        game = new Game();
-        $(document).ready(function(){
-          $("td").click(function(event){
-                stop = false;
-                //real player play
-                var isValid = game.take(this.id);
-                    if (isValid) {
-                    draw(this.id,game.otherPlayer());
-                    if (game.isFinished()&&game.winner!=undefined ){
-                        stop = true;
-                         alert(game.winner+" win the Game!");
-                    } else if (game.isFinished()) {
-                        stop = true;
+    <head>
+        <title>Tic Tac Toe Javascript</title>
+        <style type="text/css">
+            .hidden {display:none;}
+        </style>
+        <script src="offline/jquery-latest.js"></script>
+        <script src="game.js"></script>
+        <script>
+            "use strict";
+            var draw = function (id, symbol) {
+                $("#"+id).text(symbol);
+            }
+            var hasWinner = function() {
+                if (game.isFinished()) {
+                    if(game.winner !== undefined ) {
+                        alert(game.winner+" win the Game!");
+                    } else {
                         alert("No winner");
                     }
+                    $("#replay").show();
+                    return true;
                 }
-                if (!stop){
-                    //bot play
-                    var firstPositionAvailable = game.getFirstPositionAvailable();
-                    game.take(firstPositionAvailable);
-                    draw(firstPositionAvailable,game.otherPlayer());
-                }
-              });
-          });
-
-        function draw(id,symbol){
-            $("#"+id).text(symbol);
-        }
-
-
-    </script>
-
-</head>
-<body>
-<table>
-    <tr>
-        <td id="1">_</td>
-        <td id="2">_</td>
-        <td id="3">_</td>
-    </tr>
-    <tr>
-        <td id="4">_</td>
-        <td id="5">_</td>
-        <td id="6">_</td>
-    </tr>
-    <tr>
-        <td id="7">_</td>
-        <td id="8">_</td>
-        <td id="9">_</td>
-    </tr>
-</table>
-</body>
+                return false;
+            }
+            
+            var game = new Game();
+            var stop = false;
+            $(document).ready(function() {
+                $("td").click(function(event) {
+                    if(!stop) {
+                        // real player play
+                        var isValid = game.take(this.id);
+                        if (isValid) {
+                            draw(this.id, game.otherPlayer());
+                            stop = hasWinner();
+                        }
+                        if (!stop) {
+                            // bot play
+                            var firstPositionAvailable = game.getFirstPositionAvailable();
+                            game.take(firstPositionAvailable);
+                            draw(firstPositionAvailable,game.otherPlayer());
+                            stop = hasWinner();
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td id="1">_</td>
+                <td id="2">_</td>
+                <td id="3">_</td>
+            </tr>
+            <tr>
+                <td id="4">_</td>
+                <td id="5">_</td>
+                <td id="6">_</td>
+            </tr>
+            <tr>
+                <td id="7">_</td>
+                <td id="8">_</td>
+                <td id="9">_</td>
+            </tr>
+        </table>
+        <p id="replay" class="hidden"><a href="javascript:document.location.reload();">play again !</a></p>
+    </body>
 </html>
