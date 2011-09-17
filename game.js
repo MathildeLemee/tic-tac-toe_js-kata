@@ -1,17 +1,23 @@
-Game = function() {
-		this.fields = ['_','_','_','_','_','_','_','_','_'];
-        this.curPlayer = "X";
-        this.winner;
+
+
+ Game = function () {
+
+    this.fields = ['_','_','_','_','_','_','_','_','_'];
+    this.curPlayer = "X";
+    this.winner;
+    this.state;
 	}
 
 	Game.prototype = {
-       take : function(field) {
-            if (this.fields[field-1]=='_') {
+       take : function(field,symbol) {
+            console.log(this.curPlayer+" "+symbol);
+            if ((this.curPlayer == symbol) && (this.fields[field-1]=='_')) {
                 this.fields[field-1] = this.curPlayer;
                  this.curPlayer=this.otherPlayer();
                 return true;
             }
             return false;
+
         },
 		isFinished : function() {
     		  var all = this.fields.every(function (field){
@@ -44,4 +50,9 @@ Game = function() {
          getFirstPositionAvailable :function(){
              return this.fields.indexOf('_')+1;
          }
+
 	}
+
+exports.createGame = function() {
+  return new Game();
+};

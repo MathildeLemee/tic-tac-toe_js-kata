@@ -1,0 +1,149 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+        <script src="socket.io/socket.io.js"></script>
+
+<script src="../offline/jquery-latest.js"></script>
+<!-- Titre
+************************************************************-->
+<title>Tic Tac Toe</title>
+
+<!-- Feuille de style
+************************************************************-->
+<style type="text/css" media="screen">
+	@import url(/static/style.css);
+</style>
+
+<script>
+  var socket = io.connect();
+
+    $(document).ready(function(){
+          $("td").click(function(event){
+                socket.emit('take', { 'field': this.id });
+          });
+
+    });
+
+    socket.on('draw', function (data) {
+    draw(data.field,data.player);
+  });
+  socket.on('result', function (data) {
+    alert(data);
+  });
+    socket.on('play', function (data) {
+    alert(data);
+        $("#infos").text(data);
+    });
+  socket.on('player', function (data) {
+            $("#player").text("You are "+data);
+    });
+   socket.on('info', function (data) {
+            $("#infos").text(data);
+    });
+    socket.on('statsX', function (data) {
+                $("#gainX").text(data);
+        });
+    socket.on('statsO', function (data) {
+                $("#gainO").text(data);
+        });
+
+
+        function draw(id,symbol){
+            $("#"+id).text(symbol);
+        }
+</script>
+
+	</head>
+
+<body id="simple-css-design">
+
+
+<!-- Conteneur
+************************************************************-->
+<div id="conteneur">
+
+
+
+
+
+<!-- Barre verticale
+************************************************************-->
+<div id="navigation">
+
+	<div id="styles">
+	<h2>Pages</h2>
+<ul>
+	<li><a href="index.html">Jeu</a></li>
+	<li><a href="stats.html">Stats</a></li>
+	<li><a href="about.html">A propos</a></li>
+
+</ul>
+	</div>
+
+	<div id="informations">
+	<h2>Infos</h2>
+     <p id="player"></p>
+    <p id="infos"></p>
+	</div>
+   <div id="stats">
+	<h2>Stats</h2>
+		<p>X win <span id="gainX"></span> times.</p>
+
+        <p>O win <span id="gainO"></span> times.</p>
+	</div>
+</div>
+
+
+<!-- Contenu
+************************************************************-->
+<div id="contenu"><div id="main">
+
+<div id="projet-simple-css-design">
+	<h2><span>TicTacToe !</span></h2>
+        <div id="game">
+            <div id="plateau">
+	<table>
+
+    <tr>
+        <td id="1">_</td>
+        <td id="2">_</td>
+        <td id="3">_</td>
+    </tr>
+    <tr>
+        <td id="4">_</td>
+        <td id="5">_</td>
+        <td id="6">_</td>
+    </tr>
+    <tr>
+        <td id="7">_</td>
+        <td id="8">_</td>
+        <td id="9">_</td>
+    </tr>
+
+</table>    </div>
+         </div>
+
+</div>
+
+<!-- /Contenu
+************************************************************-->
+</div>  </div>
+
+
+<!-- /Conteneur
+************************************************************-->
+</div>
+
+
+<!-- Balises de fermeture
+************************************************************-->
+
+	</body>
+</html>
+
+

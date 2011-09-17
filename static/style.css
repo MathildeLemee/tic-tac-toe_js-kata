@@ -1,0 +1,154 @@
+************************************************************/
+* {
+	padding: 0;
+	margin: 0;
+}
+body
+{
+	margin: 1em 0;
+	padding: 0;
+	text-align: center;
+	font-size: 0.7em;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	background: #880000;
+	color: #000;
+}
+
+
+/* Liens
+************************************************************/
+a {
+	color: #dd0000;
+	text-decoration: none;
+}
+a:hover {
+	color: #000;
+}
+
+
+/* En-tetes H
+************************************************************/
+h1 {
+	font-size: 2.5em;
+	font-weight: bold;
+}
+h2 {
+	font-size: 1.7em;
+	font-weight: bold;
+	color: #dd0000;
+}
+h3 {
+	font-size: 1.4em;
+	font-weight: bold;
+	color: #dd0000;
+}
+h4 {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+h5 {
+	font-size: 1em;
+	font-weight: bold;
+}
+h6 {
+	font-size: 0.9em;
+	font-weight: normal;
+}
+
+table {
+    font-size: 8em;
+	font-weight: bold;
+    display: inline-table;
+
+}
+
+/* Conteneur
+************************************************************/
+div#conteneur {
+	width: 900px;
+	margin: 0 auto;
+}
+
+
+/* Images
+************************************************************/
+img {
+	border:0;
+}
+div#contenu img {
+	border: 0;
+}
+
+
+/* Contenu
+************************************************************/
+div#contenu
+{
+	padding: 0 15px 20px 170px;
+	background: url(main.jpg) repeat-y;
+    text-align : center;
+
+}
+div#contenu p
+{
+	line-height: 1.6em;
+	padding: 0.15em 0.5em;
+}
+div#contenu h2
+{
+	padding: 0.6em 0 0.2em 25px;
+	line-height: 30px;
+	background: url(puce.png) no-repeat left bottom;
+}
+div#contenu h3
+{
+	padding-left: 15px;
+	line-height: 25px;
+}
+div#game {
+
+	margin: 0 auto;
+        text-align : center;
+
+}
+      div#plateau {
+              text-align : center;
+
+      }
+
+/* Barre verticale
+************************************************************/
+div#navigation {
+	position: relative;
+	float: left;
+	left: 0;
+	top: 0;
+	width: 13em;
+	text-align: left;
+	padding: 0 0 0 1em;
+}
+div#navigation h2 {
+	padding-left: 0.7em;
+	line-height: 25px;
+	font-size: 1.4em;
+	border-bottom: 1px solid #dd0000;
+	margin-bottom: 0.4em;
+}
+div#navigation p , div#navigation h3 , div#navigation h4 , div#navigation h5 , div#navigation h6{
+	margin: 1.5em 0 1.5em 0.7em;
+}
+
+
+div#navigation ul {
+	list-style-type: none;
+	margin: 0 0 1ex 0;
+	padding:0;
+	cursor: pointer;
+}
+div#navigation ul li {
+	text-align: left;
+	padding: 0.2em 0 0.2em 0.8em;
+}
+
+
+
