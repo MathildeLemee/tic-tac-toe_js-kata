@@ -30,11 +30,11 @@
             //check x win
             if ((ligne+colonne+diagonale).indexOf("XXX") != -1) {
                 this.winner = "X";
-                console.log(ligne+colonne+diagonale);
+                console.log('grille '+ligne+colonne+diagonale);
                 return true;
              }else if ((ligne+colonne+diagonale).indexOf("OOO") != -1) {
                  this.winner = "O";
-                 console.log(ligne+colonne+diagonale);
+                 console.log('grille '+ligne+colonne+diagonale);
                 return true;
               }
 			return all;
