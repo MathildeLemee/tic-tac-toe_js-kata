@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/'));
 app.get('/', function(req, res){
     res.sendfile(__dirname + '/static/index.html');
 });
-app.listen();
+app.listen(process.env.PORT||9090, "0.0.0.0");
 
 
 
