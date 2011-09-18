@@ -1,2 +1,2 @@
-{"name":"tictactoe","version":"1.0.0","dependencies":{"express":"latest","socket.io":"0.8","redis-node":"latest"}}
+{"name":"tictactoe","version":"1.0.0","dependencies":{"express":"latest","socket.io":"0.8","redis-node":"latest","redis":"latest"}}
 
