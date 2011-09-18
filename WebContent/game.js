@@ -16,8 +16,8 @@ Game.prototype = {
         var all = this.fields.every(function(field) {
             return field != "_";
         });
-        var ligne = this.fields[0] + this.fields[1] + this.fields[2] + "|" + this.fields[3] + this.fields[4] + this.fields[5] + "|" + this.fields[6] + this.fields[7] + this.fields[8];
-        var colonne = this.fields[0] + this.fields[3] + this.fields[6] + "|" + this.fields[1] + this.fields[4] + this.fields[7] + "|" + this.fields[2] + this.fields[5] + this.fields[8];
+        var ligne = this.fields[0] + this.fields[1] + this.fields[2] + "|" + this.fields[3] + this.fields[4] + this.fields[5] + "|" + this.fields[6] + this.fields[7] + this.fields[8]+ "|";
+        var colonne = this.fields[0] + this.fields[3] + this.fields[6] + "|" + this.fields[1] + this.fields[4] + this.fields[7] + "|" + this.fields[2] + this.fields[5] + this.fields[8]+ "|";
         var diagonale = this.fields[0] + this.fields[4] + this.fields[8] + "|" + this.fields[2] + this.fields[4] + this.fields[6];
         //check x win
         if ((ligne + colonne + diagonale).indexOf("XXX") != -1) {
