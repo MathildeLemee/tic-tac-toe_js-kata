@@ -82,19 +82,8 @@ function Info(symbol,room,stop)
         socket.broadcast.to(info.room).emit('info','The other player have been deconnected ! Please refresh.');
        });
   });
-});
-  function statsX() {
-     var x = client.get('X',function (err,res) {
-            io.sockets.emit('statsX',res);
-        });
-     }
 
-     function statsO() {
-        var o = client.get('O',function (err,res) {
-        io.sockets.emit('statsO',res);
-           });
-     }
-function isFinished(info) {
+  function isFinished(info) {
    game = allGame[info.room];
       var stop =false;
 
@@ -113,6 +102,19 @@ function isFinished(info) {
           console.log(stop);
          return stop;
 }
+});
+  function statsX() {
+     var x = client.get('X',function (err,res) {
+            io.sockets.emit('statsX',res);
+        });
+     }
+
+     function statsO() {
+        var o = client.get('O',function (err,res) {
+        io.sockets.emit('statsO',res);
+           });
+     }
+
 function draw(field,symbol,room) {
       io.sockets.in(room).emit('draw',{'field':field,'player':symbol});
   }
