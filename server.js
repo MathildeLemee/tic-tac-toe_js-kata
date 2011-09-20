@@ -28,30 +28,25 @@ function Info(symbol,room,stop)
   var allGame=new Array();
 
   io.sockets.on('connection', function (socket) {
- client.get('X',function (err,res) {
+
+        client.get('X',function (err,res) {
            socket.emit('statsX',res);
         });
           client.get('O',function (err,res) {
             socket.emit('statsO',res);
         });
 
-console.log("connected -------------");
+    console.log("connected -------------");
     if (currentRoom==undefined){
-       socket.join(socket.id);
-       currentRoom=socket.id;
-       allGame[currentRoom] = new Game();
-       allGame[currentRoom].stop = true;
-       socket.set('info', new Info("X", currentRoom),function () {socket.emit('player',"X");});
-       socket.emit('info','Ok, wait for an other player to connect.');
+       initX(socket);
 
     }else{
         var stop = false;
-        socket.join(currentRoom);
-        socket.set('info', new Info("O", currentRoom),function () {socket.emit('player',"O");});
-        allGame[currentRoom].stop = false;
-        socket.broadcast.to(currentRoom).emit('info','Game start ! Is is your turn to play !');
-        socket.emit('info','Wait for X to play.');
-        currentRoom = undefined;
+        if (allGame[currentRoom].invalid) {
+                  initX(socket);
+       }else{
+            initO(socket);
+        }
     }
 
   socket.on('take', function (data) {
@@ -79,8 +74,16 @@ console.log("connected -------------");
     });
 
 
-
-     function statsX() {
+  socket.on('disconnect', function () {
+        socket.get('info',function (err, info) {
+        game = allGame[info.room];
+        game.invalid = true;
+        game.stop = true;
+        socket.broadcast.to(info.room).emit('info','The other player have been deconnected ! Please refresh.');
+       });
+  });
+});
+  function statsX() {
      var x = client.get('X',function (err,res) {
             io.sockets.emit('statsX',res);
         });
@@ -113,12 +116,21 @@ function isFinished(info) {
 function draw(field,symbol,room) {
       io.sockets.in(room).emit('draw',{'field':field,'player':symbol});
   }
+          function initX(socket){
+              socket.join(socket.id);
+             currentRoom=socket.id;
+             allGame[currentRoom] = new Game();
+             allGame[currentRoom].stop = true;
+             socket.set('info', new Info("X", currentRoom),function () {socket.emit('player',"X");});
+             socket.emit('info','Ok, wait for an other player to connect.');
 
-  socket.on('disconnect', function () {
-        socket.get('info',function (err, info) {
-        game = allGame[info.room];
-        game.stop = true;
-        socket.broadcast.to(info.room).emit('info','The other player have been deconnected !');
-       });
-  });
-});
+          }
+
+             function initO(socket){
+                  socket.join(currentRoom);
+                  socket.set('info', new Info("O", currentRoom),function () {socket.emit('player',"O");});
+                  allGame[currentRoom].stop = false;
+                  socket.broadcast.to(currentRoom).emit('info','Game start ! Is is your turn to play !');
+                  socket.emit('info','Wait for X to play.');
+                  currentRoom = undefined;
+              }
