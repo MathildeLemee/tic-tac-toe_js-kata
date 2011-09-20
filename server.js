@@ -41,7 +41,6 @@ function Info(symbol,room,stop)
        initX(socket);
 
     }else{
-        var stop = false;
         if (allGame[currentRoom].invalid) {
                   initX(socket);
        }else{
